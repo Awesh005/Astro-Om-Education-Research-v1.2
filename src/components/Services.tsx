@@ -19,7 +19,13 @@ export default function Services() {
       </div>
 
       <Container>
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <Badge variant="secondary" className="mb-4 bg-indigo-50 text-indigo-700 border-indigo-200">
             Our Focus
           </Badge>
@@ -29,7 +35,7 @@ export default function Services() {
           <p className="text-slate-600 max-w-2xl mx-auto">
             We focus on holistic development to ensure students excel in all aspects of life.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {FOCUS_AREAS.slice(0, 4).map((service, index) => (

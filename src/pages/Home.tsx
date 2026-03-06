@@ -1,6 +1,6 @@
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
-
+import Courses from '../components/Courses';
 import IndustrialTrainingSection from '../components/IndustrialTrainingSection';
 import Services from '../components/Services';
 import WhyChooseUs from '../components/WhyChooseUs';
@@ -17,6 +17,7 @@ export default function Home() {
       <div className="bg-slate-50">
          <Stats />
       </div>
+      <Courses />
       <WhyChooseUs />
      
       <IndustrialTrainingSection />

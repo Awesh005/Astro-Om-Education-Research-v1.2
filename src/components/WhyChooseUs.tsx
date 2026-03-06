@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { SectionWrapper, Container } from './ui/Layout';
 import { Badge } from './ui/Badge';
 import { Card } from './ui/Cards';
-import { Monitor, BookOpen, TrendingUp, Users, DollarSign, Calendar } from 'lucide-react';
+import { Monitor, BookOpen, TrendingUp, Users, IndianRupee, Calendar } from 'lucide-react';
 
 export default function WhyChooseUs() {
   const academicFeatures = [
@@ -30,8 +30,8 @@ export default function WhyChooseUs() {
       description: "Systems designed for discipline monitoring and transparency between parents and teachers."
     },
     {
-      icon: <DollarSign className="w-6 h-6" />,
-      title: "Pocket-Friendly Fees",
+      icon: <IndianRupee className="w-6 h-6" />,
+      title: "Pocket-Friendly Fee",
       description: "Affordable tuition rates paired with a robust scholarship and fee refund policy."
     },
     {
@@ -44,7 +44,13 @@ export default function WhyChooseUs() {
   return (
     <SectionWrapper id="why-choose-us" background="light">
       <Container>
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <Badge variant="secondary" className="mb-4 bg-purple-50 text-purple-700 border-purple-200">
             Our Unique Features & Facilities
           </Badge>
@@ -54,7 +60,7 @@ export default function WhyChooseUs() {
           <p className="text-slate-600 max-w-2xl mx-auto">
             We combine academic excellence with financial transparency and support.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Column 1: Academic & Digital Excellence */}
@@ -69,15 +75,23 @@ export default function WhyChooseUs() {
             </div>
             
             {academicFeatures.map((feature, index) => (
-              <Card key={index} className="flex items-start gap-4 p-6 hover:border-teal-200 transition-colors">
-                <div className="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
-                  {feature.icon}
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">{feature.title}</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
-                </div>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <Card className="flex items-start gap-4 p-6 hover:border-teal-200 transition-colors h-full">
+                  <div className="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-2">{feature.title}</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -93,15 +107,23 @@ export default function WhyChooseUs() {
             </div>
 
             {supportFeatures.map((feature, index) => (
-              <Card key={index} className="flex items-start gap-4 p-6 hover:border-orange-200 transition-colors">
-                <div className="w-12 h-12 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
-                  {feature.icon}
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">{feature.title}</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
-                </div>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <Card className="flex items-start gap-4 p-6 hover:border-orange-200 transition-colors h-full">
+                  <div className="w-12 h-12 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-2">{feature.title}</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
           </motion.div>
         </div>

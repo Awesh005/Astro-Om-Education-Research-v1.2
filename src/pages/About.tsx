@@ -49,7 +49,7 @@ export default function About() {
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-slate-900 mb-6 leading-tight">
               Smart Learning with <br />
-              <span className="text-blue-600">Pocket-Friendly Fees</span>
+              <span className="text-blue-600">Pocket-Friendly Fee</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
               A modern, education-focused institute providing online classes for students of Class 6 to 10.
@@ -130,7 +130,7 @@ export default function About() {
               </div>
               <h2 className="text-2xl font-bold font-display text-slate-900 mb-4">Our Vision</h2>
               <p className="text-slate-600 leading-relaxed text-lg">
-                Our vision is to provide every student with <strong>quality education along with practical skills</strong>, at minimum and affordable fees, so that they can become strong both academically and professionally in the future.
+                Our vision is to provide every student with <strong>quality education along with practical skills</strong>, at minimum and affordable fee, so that they can become strong both academically and professionally in the future.
               </p>
             </motion.div>
 

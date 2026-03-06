@@ -15,7 +15,7 @@ export const COURSES = [
     },
     syllabus: [
       {
-        subject: "English (JAC)",
+        subject: "English",
         topics: [
           "English Reader (Prose & Poems)",
           "Supplementary Reader",
@@ -49,7 +49,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Computer + IT (JAC)",
+        subject: "Computer + IT ",
         subSections: [
           {
             title: "Theory",
@@ -90,7 +90,7 @@ export const COURSES = [
     },
     syllabus: [
       {
-        subject: "English (JAC)",
+        subject: "English",
         topics: [
           "English Reader (Prose & Poems)",
           "Supplementary Reader",
@@ -126,7 +126,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Computer + IT (JAC)",
+        subject: "Computer + IT",
         subSections: [
           {
             title: "Theory",
@@ -168,7 +168,7 @@ export const COURSES = [
     },
     syllabus: [
       {
-        subject: "English (JAC)",
+        subject: "English",
         topics: [
           "Honeydew (Prose & Poems)",
           "It So Happened (Supplementary Reader)",
@@ -176,7 +176,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Mathematics (JAC)",
+        subject: "Mathematics",
         topics: [
           "Algebraic Expressions & Identities",
           "Visualising Solid Shapes",
@@ -197,7 +197,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Science (JAC)",
+        subject: "Science",
         subSections: [
           {
             title: "Chemistry",
@@ -231,7 +231,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Social Science (JAC)",
+        subject: "Social Science)",
         subSections: [
           {
             title: "Geography",
@@ -305,7 +305,7 @@ export const COURSES = [
     },
     syllabus: [
       {
-        subject: "English (JAC)",
+        subject: "English",
         topics: [
           "Beehive (Prose & Poems)",
           "Moments (Supplementary Reader)",
@@ -313,7 +313,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Mathematics (JAC)",
+        subject: "Mathematics",
         topics: [
           "Quadrilaterals",
           "Areas of Parallelograms & Triangles",
@@ -333,7 +333,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Science (JAC)",
+        subject: "Science",
         subSections: [
           {
             title: "Chemistry",
@@ -368,7 +368,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Social Science (JAC)",
+        subject: "Social Science",
         subSections: [
           {
             title: "Geography",
@@ -457,7 +457,7 @@ export const COURSES = [
     },
     syllabus: [
       {
-        subject: "English (JAC)",
+        subject: "English",
         topics: [
           "First Flight (Prose & Poems)",
           "Footprints Without Feet (Supplementary Reader)",
@@ -465,7 +465,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Mathematics (JAC)",
+        subject: "Mathematics",
         subSections: [
           {
             title: "Trigonometry",
@@ -506,7 +506,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Science (JAC)",
+        subject: "Science",
         subSections: [
           {
             title: "Chemistry",
@@ -541,7 +541,7 @@ export const COURSES = [
         ]
       },
       {
-        subject: "Social Science (JAC)",
+        subject: "Social Science",
         subSections: [
           {
             title: "Geography",

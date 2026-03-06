@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Send, Youtube } from 'lucide-react';
 import { Container } from './ui/Layout';
 
 const Footer = () => {
@@ -30,6 +30,9 @@ const Footer = () => {
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all duration-300">
                 <Linkedin size={18} />
+              </a>
+              <a href="https://www.youtube.com/@Astroomrashifal" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all duration-300">
+                <Youtube size={18} />
               </a>
             </div>
           </div>

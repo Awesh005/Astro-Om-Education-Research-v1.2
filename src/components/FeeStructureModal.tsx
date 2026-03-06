@@ -77,7 +77,7 @@ export default function FeeStructureModal({ isOpen, onClose, courseName, feeStru
             </div>
             
             <div className="p-4 border-t border-slate-100 bg-white shrink-0 text-center text-xs text-slate-500">
-              * Fees are subject to change. Please contact administration for latest updates.
+              * Fee are subject to change. Please contact administration for latest updates.
             </div>
           </motion.div>
         </div>

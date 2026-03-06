@@ -13,7 +13,13 @@ export default function Courses() {
   return (
     <SectionWrapper id="programs" background="default">
       <Container>
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <Badge variant="outline" className="mb-4 border-blue-200 bg-blue-50 text-blue-700">
             Our Offerings
           </Badge>
@@ -23,7 +29,7 @@ export default function Courses() {
           <p className="text-slate-600 max-w-2xl mx-auto">
             Comprehensive curriculum designed by industry experts to help you master the latest technologies and launch your career.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <AnimatePresence>
@@ -77,7 +83,13 @@ export default function Courses() {
                       )}
                     </div>
 
-                    <button className="w-full py-3 px-4 rounded-xl bg-slate-50 text-slate-900 font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                    <button 
+                      onClick={() => {
+                        navigate('/courses');
+                        window.scrollTo(0, 0);
+                      }}
+                      className="w-full py-3 px-4 rounded-xl bg-slate-50 text-slate-900 font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                    >
                       View Details
                       <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                     </button>
@@ -88,15 +100,15 @@ export default function Courses() {
           </AnimatePresence>
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-12">
           <button 
             onClick={() => {
               navigate('/courses');
               window.scrollTo(0, 0);
             }}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 hover:border-blue-300 transition-all shadow-sm hover:shadow-md"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
           >
-            View All {COURSES.length} Courses <ArrowRight size={20} />
+            View More Details <ArrowRight size={20} />
           </button>
         </div>
       </Container>

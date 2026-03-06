@@ -18,6 +18,7 @@ export default function Hero() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [studentClass, setStudentClass] = useState("");
+  const [board, setBoard] = useState("");
   const [mobile, setMobile] = useState("");
 
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function Hero() {
     formData.append("entry.1345355600", name); 
     formData.append("entry.335730671", email);
     formData.append("entry.994511878", studentClass); // Mapped to Class
+    formData.append("entry.BOARD_ID_PLACEHOLDER", board); // Mapped to Board
     formData.append("entry.1963209061", mobile);
 
     try {
@@ -54,6 +56,7 @@ export default function Hero() {
       setName("");
       setEmail("");
       setStudentClass("");
+      setBoard("");
       setMobile("");
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -91,7 +94,7 @@ export default function Hero() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 min-h-[160px] md:min-h-[180px] lg:min-h-[200px]">
               <div className="flex flex-col">
                 <span className="text-3xl md:text-4xl lg:text-5xl mb-2">Smart Learning with</span>
-                <span>Pocket-Friendly Fees</span>
+                <span>Pocket-Friendly Fee</span>
                 <div className="h-[1.2em] overflow-hidden mt-2">
                   <AnimatePresence mode="wait">
                     <motion.span
@@ -145,7 +148,7 @@ export default function Hero() {
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                 <p className="text-lg text-blue-50">
-                  <strong className="text-white">Affordable Education</strong> - "Tea ke kharch mein padhe"
+                  <strong className="text-white">Affordable Education</strong> - "Tea/Coffee"
                 </p>
               </div>
               <div className="flex items-start gap-3">
@@ -228,6 +231,24 @@ export default function Hero() {
                   <option value="Class 9">Class 9</option>
                   <option value="Class 10">Class 10</option>
                   <option value="Other">Other</option>
+                </select>
+              </div>
+
+              {/* Board Selection */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Select your Board <span className="text-red-500">*</span>
+                </label>
+                <select
+                  value={board}
+                  onChange={(e) => setBoard(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-700 bg-white"
+                >
+                  <option value="" disabled>Select your Board</option>
+                  <option value="CBSE Board">CBSE Board</option>
+                  <option value="JAC Board">JAC Board</option>
+                  <option value="Other State Board">Other State Board</option>
                 </select>
               </div>
 

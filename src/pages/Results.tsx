@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Search, AlertCircle, CheckCircle, FileText, User, Phone, BookOpen, ChevronRight, Download } from 'lucide-react';
+import { Search, AlertCircle, CheckCircle, FileText, User, Phone, BookOpen, ChevronRight, Download, School } from 'lucide-react';
 import Papa from 'papaparse';
 import { Container } from '../components/ui/Layout';
 import { PrimaryButton } from '../components/ui/Buttons';
 
 // Google Sheet ID from user request
-const SHEET_ID = '158ggidRkTm2SVk0yRAIJGzsOvKlhqUgJz8N_pmQVZho';
-const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+// const SHEET_ID = '158ggidRkTm2SVk0yRAIJGzsOvKlhqUgJz8N_pmQVZho';
+// const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+
+// Dummy Data for Testing
+const DUMMY_DATA = `student_name,father_name,class,batch,mobile,board,subject1,subject1_max,subject1_marks,subject2,subject2_max,subject2_marks,subject3,subject3_max,subject3_marks,subject4,subject4_max,subject4_marks,subject5,subject5_max,subject5_marks,total_marks,percentage,result_status
+Rahul Kumar,Suresh Kumar,Class 10,Morning Batch,9876543210,CBSE,Mathematics,100,95,Science,100,88,English,100,92,Social Science,100,85,Hindi,100,90,450,90,Pass
+Priya Singh,Manoj Singh,Class 9,Evening Batch,9123456789,JAC,Mathematics,100,78,Science,100,82,English,100,85,Social Science,100,75,Hindi,100,80,400,80,Pass
+Amit Sharma,Rajesh Sharma,Class 8,Weekend Batch,9988776655,Other,Mathematics,100,45,Science,100,50,English,100,60,Social Science,100,55,Hindi,100,58,268,53.6,Pass
+Sneha Gupta,Vikas Gupta,Class 10,Morning Batch,8877665544,CBSE,Mathematics,100,32,Science,100,40,English,100,55,Social Science,100,45,Hindi,100,60,232,46.4,Fail`;
 
 interface StudentResult {
   student_name: string;
@@ -15,6 +22,7 @@ interface StudentResult {
   class: string;
   batch: string;
   mobile: string;
+  board?: string;
   subject1: string;
   subject1_max: string;
   subject1_marks: string;
@@ -37,6 +45,7 @@ interface StudentResult {
 
 export default function Results() {
   const [searchParams, setSearchParams] = useState({
+    board: '',
     studentClass: '',
     mobile: ''
   });
@@ -52,38 +61,37 @@ export default function Results() {
     setResult(null);
     setHasSearched(false);
 
-    try {
-      const response = await fetch(SHEET_CSV_URL);
-      if (!response.ok) throw new Error('Failed to fetch data');
-      
-      const csvText = await response.text();
-      
-      Papa.parse<StudentResult>(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          const foundStudent = results.data.find(student => 
-            student.mobile?.toString().trim() === searchParams.mobile.trim() &&
-            student.class?.toString().trim() === searchParams.studentClass.trim()
-          );
+    // Simulate network delay for better UX
+    setTimeout(() => {
+      try {
+        Papa.parse<StudentResult>(DUMMY_DATA, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            const foundStudent = results.data.find(student => 
+              student.mobile?.toString().trim() === searchParams.mobile.trim() &&
+              student.class?.toString().trim() === searchParams.studentClass.trim() &&
+              (searchParams.board === '' || student.board?.toString().trim() === searchParams.board.trim())
+            );
 
-          if (foundStudent) {
-            setResult(foundStudent);
-          } else {
-            setError('Result not found. Please check your details.');
+            if (foundStudent) {
+              setResult(foundStudent);
+            } else {
+              setError('Result not found. Please check your details.');
+            }
+            setHasSearched(true);
+            setLoading(false);
+          },
+          error: (err: any) => {
+            setError('Error parsing result data. Please try again later.');
+            setLoading(false);
           }
-          setHasSearched(true);
-          setLoading(false);
-        },
-        error: (err: any) => {
-          setError('Error parsing result data. Please try again later.');
-          setLoading(false);
-        }
-      });
-    } catch (err) {
-      setError('Network error. Please check your connection.');
-      setLoading(false);
-    }
+        });
+      } catch (err) {
+        setError('An error occurred. Please try again.');
+        setLoading(false);
+      }
+    }, 1000);
   };
 
   return (
@@ -113,7 +121,25 @@ export default function Results() {
 
           {/* Search Card */}
           <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 border border-slate-100 no-print">
-            <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-1">
+                <label className="block text-sm font-medium text-slate-700">Board</label>
+                <div className="relative">
+                  <select
+                    required
+                    value={searchParams.board}
+                    onChange={(e) => setSearchParams({...searchParams, board: e.target.value})}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-white appearance-none"
+                  >
+                    <option value="">Select Board</option>
+                    <option value="CBSE">CBSE</option>
+                    <option value="JAC">JAC Boards</option>
+                    <option value="Other">Other State Boards</option>
+                  </select>
+                  <School className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+                </div>
+              </div>
+
               <div className="space-y-1">
                 <label className="block text-sm font-medium text-slate-700">Class</label>
                 <div className="relative">
@@ -147,7 +173,7 @@ export default function Results() {
                 </div>
               </div>
 
-              <div className="md:col-span-2">
+              <div className="md:col-span-3">
                 <button
                   type="submit"
                   disabled={loading}

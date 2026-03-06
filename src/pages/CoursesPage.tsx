@@ -13,7 +13,7 @@ import SyllabusModal from '../components/SyllabusModal';
 export default function CoursesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
-  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFeeModalOpen, setIsFeeModalOpen] = useState(false);
@@ -23,23 +23,20 @@ export default function CoursesPage() {
   const [selectedFeeStructure, setSelectedFeeStructure] = useState<{ cbse: string; state: string } | null>(null);
 
   const classes = Array.from(new Set(COURSES.map(c => c.title)));
-  const subjects = Array.from(new Set(COURSES.flatMap(c => c.technologies || [])));
+
 
   const filteredCourses = useMemo(() => {
     return COURSES.filter(course => {
       const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             course.technologies?.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesClass = selectedClass ? course.title === selectedClass : true;
-      const matchesSubject = selectedSubject ? course.technologies?.includes(selectedSubject) : true;
-      
-      return matchesSearch && matchesClass && matchesSubject;
+      return matchesSearch && matchesClass;
     });
-  }, [searchQuery, selectedClass, selectedSubject]);
+  }, [searchQuery, selectedClass]);
 
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedClass(null);
-    setSelectedSubject(null);
   };
 
   return (
@@ -63,7 +60,7 @@ export default function CoursesPage() {
                   <h3 className="font-bold text-slate-900 flex items-center gap-2">
                     <Filter size={20} /> Filters
                   </h3>
-                  {(selectedClass || selectedSubject || searchQuery) && (
+                  {(selectedClass || searchQuery) && (
                     <button 
                       onClick={clearFilters}
                       className="text-xs text-red-500 hover:text-red-700 font-medium"
@@ -92,23 +89,7 @@ export default function CoursesPage() {
                     </div>
                   </div>
 
-                  <div className="border-t border-slate-100 pt-6">
-                    <h4 className="font-semibold text-slate-700 mb-3 text-sm">Subject</h4>
-                    <div className="space-y-2">
-                      {subjects.map(subject => (
-                        <label key={subject} className="flex items-center gap-2 cursor-pointer group">
-                          <input 
-                            type="radio" 
-                            name="subject" 
-                            checked={selectedSubject === subject}
-                            onChange={() => setSelectedSubject(subject)}
-                            className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
-                          />
-                          <span className="text-slate-600 text-sm group-hover:text-blue-600 transition-colors">{subject}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -151,24 +132,7 @@ export default function CoursesPage() {
                         </div>
                       </div>
                       
-                      <div>
-                        <h4 className="font-semibold text-slate-700 mb-3 text-sm">Subject</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {subjects.map(subject => (
-                            <button
-                              key={subject}
-                              onClick={() => setSelectedSubject(selectedSubject === subject ? null : subject)}
-                              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                                selectedSubject === subject 
-                                  ? 'bg-blue-50 border-blue-200 text-blue-700' 
-                                  : 'bg-white border-slate-200 text-slate-600 hover:border-blue-200'
-                              }`}
-                            >
-                              {subject}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+
 
                       <button 
                         onClick={clearFilters}
@@ -262,7 +226,7 @@ export default function CoursesPage() {
                               }}
                               className="flex-1 py-2.5 text-sm font-medium rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-blue-300 transition-all flex items-center justify-center gap-1.5"
                             >
-                              <IndianRupee size={14} /> Fees
+                              <IndianRupee size={14} /> Fee
                             </button>
                           )}
                           <PrimaryButton 
