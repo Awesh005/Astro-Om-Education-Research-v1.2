@@ -1,8 +1,8 @@
-import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle2, ChevronDown } from 'lucide-react';
-import { Container } from './ui/Layout';
-import React, { useState, useEffect } from 'react';
-import BoardFlipBadge from './BoardFlipBadge';
+import { motion, AnimatePresence } from "motion/react";
+import { CheckCircle2, ChevronDown } from "lucide-react";
+import { Container } from "./ui/Layout";
+import React, { useState, useEffect } from "react";
+import BoardFlipBadge from "./BoardFlipBadge";
 
 const courses = [
   "Class 6th",
@@ -10,7 +10,7 @@ const courses = [
   "Class 8th",
   "Class 9th",
   "Class 10th",
-  "Extra Skills"
+  "Extra Skills",
 ];
 
 export default function Hero() {
@@ -34,7 +34,7 @@ export default function Hero() {
     const formData = new FormData();
 
     // ✅ Correct Google Form Entry IDs (Placeholder IDs - Update with actual if available)
-    formData.append("entry.1345355600", name); 
+    formData.append("entry.1345355600", name);
     formData.append("entry.335730671", email);
     formData.append("entry.994511878", studentClass); // Mapped to Class
     formData.append("entry.BOARD_ID_PLACEHOLDER", board); // Mapped to Board
@@ -47,7 +47,7 @@ export default function Hero() {
           method: "POST",
           mode: "no-cors",
           body: formData,
-        }
+        },
       );
 
       alert("Enquiry Submitted Successfully!");
@@ -89,11 +89,11 @@ export default function Hero() {
               <span className="text-white">Astro Om</span>
             </motion.div>
 
-          
-
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 min-h-[160px] md:min-h-[180px] lg:min-h-[200px]">
               <div className="flex flex-col">
-                <span className="text-3xl md:text-4xl lg:text-5xl mb-2">Smart Learning with</span>
+                <span className="text-3xl md:text-4xl lg:text-5xl mb-2">
+                  Smart Learning with
+                </span>
                 <span>Pocket-Friendly Fee</span>
                 <div className="h-[1.2em] overflow-hidden mt-2">
                   <AnimatePresence mode="wait">
@@ -128,11 +128,14 @@ export default function Hero() {
                 { src: "/chhattisgarh-board.jpg", alt: "Chhattisgarh Board" },
                 { src: "/odisha-board.jpg", alt: "Odisha Board" },
               ].map((logo, i) => (
-                <div key={i} className="bg-white p-1.5 rounded-lg shadow-sm hover:scale-105 transition-transform">
-                  <img 
-                    src={logo.src} 
-                    alt={logo.alt} 
-                    className="h-8 w-auto object-contain" 
+                <div
+                  key={i}
+                  className="bg-white p-1.5 rounded-lg shadow-sm hover:scale-105 transition-transform"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-8 w-auto object-contain"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -148,19 +151,23 @@ export default function Hero() {
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                 <p className="text-lg text-blue-50">
-                  <strong className="text-white">Affordable Education</strong> - "Tea/Coffee"
+                  <strong className="text-white">Affordable Education</strong> -
+                  "Tea/Coffee" ke kharch mein padhe- Education for every student
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                 <p className="text-lg text-blue-50">
-                  <strong className="text-white">High Quality Content</strong> with Practical Knowledge
+                  <strong className="text-white">High Quality Content</strong>{" "}
+                  with Practical Knowledge
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                 <p className="text-lg text-blue-50">
-                  Focus on <strong className="text-white">Academic Excellence</strong> & Personality Development
+                  Focus on{" "}
+                  <strong className="text-white">Academic Excellence</strong> &
+                  Personality Development
                 </p>
               </div>
             </motion.div>
@@ -224,7 +231,9 @@ export default function Hero() {
                   required
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-700 bg-white"
                 >
-                  <option value="" disabled>Select your Class</option>
+                  <option value="" disabled>
+                    Select your Class
+                  </option>
                   <option value="Class 6">Class 6</option>
                   <option value="Class 7">Class 7</option>
                   <option value="Class 8">Class 8</option>
@@ -245,7 +254,9 @@ export default function Hero() {
                   required
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-700 bg-white"
                 >
-                  <option value="" disabled>Select your Board</option>
+                  <option value="" disabled>
+                    Select your Board
+                  </option>
                   <option value="CBSE Board">CBSE Board</option>
                   <option value="JAC Board">JAC Board</option>
                   <option value="Other State Board">Other State Board</option>
@@ -272,7 +283,14 @@ export default function Hero() {
               </button>
 
               <p className="text-xs text-slate-400 text-center leading-relaxed">
-                By submitting, I agree to Astro Om's <a href="#" className="text-blue-600 hover:underline">Terms</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
+                By submitting, I agree to Astro Om's{" "}
+                <a href="#" className="text-blue-600 hover:underline">
+                  Terms
+                </a>{" "}
+                and{" "}
+                <a href="#" className="text-blue-600 hover:underline">
+                  Privacy Policy
+                </a>
               </p>
             </form>
           </motion.div>
