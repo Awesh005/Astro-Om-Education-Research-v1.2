@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Container } from "./ui/Layout";
 import React, { useState, useEffect } from "react";
 import BoardFlipBadge from "./BoardFlipBadge";
@@ -14,6 +15,7 @@ const courses = [
 ];
 
 export default function Hero() {
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -180,13 +182,21 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl max-w-md mx-auto w-full"
           >
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                Enquire Now
-              </h3>
-              <p className="text-slate-500 text-sm">
-                Get guidance for your bright future.
-              </p>
+            <div className="mb-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  Enquire Now
+                </h3>
+                <p className="text-slate-500 text-sm">
+                  Get guidance for your bright future.
+                </p>
+              </div>
+              <button
+                onClick={() => navigate('/admission')}
+                className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors shadow-lg shadow-blue-600/30 whitespace-nowrap"
+              >
+                Apply for Admission
+              </button>
             </div>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
