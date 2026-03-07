@@ -94,7 +94,7 @@ export default function About() {
               
               <div className="bg-blue-50 border border-blue-100 p-6 rounded-xl mb-6">
                 <h3 className="font-bold text-blue-800 mb-2 flex items-center gap-2">
-                  <Star className="fill-blue-600 text-blue-600" size={20} /> Fee Refund Policy
+                  <Star className="fill-blue-600 text-blue-600" size={20} /> Fee Scholarship Policy
                 </h3>
                 <p className="text-blue-700 text-sm leading-relaxed">
                   Top 10% students with excellent academic and practical performance after one year will be eligible for a fee refund.
