@@ -12,7 +12,7 @@ export default function IndustrialTrainingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative w-full aspect-square rounded-3xl overflow-hidden shadow-2xl group"
+          className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl group"
         >
           <img 
             src="https://media.istockphoto.com/id/499775926/photo/coal-production-at-one-of-the-open-fields.jpg?s=612x612&w=0&k=20&c=4T1NoTq-O6KBaQxkSEu4wSxR0ezr2RC58e5zPVmj0zI=" 
@@ -47,7 +47,7 @@ export default function IndustrialTrainingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative w-full aspect-square rounded-3xl overflow-hidden shadow-2xl group"
+          className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl group"
         >
           <img 
             src="/astrology.jpeg" 
