@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronDown, ChevronRight, CheckCircle } from 'lucide-react';
 
@@ -10,6 +11,7 @@ interface SyllabusModalProps {
 }
 
 export default function SyllabusModal({ isOpen, onClose, course, onEnquire }: SyllabusModalProps) {
+  const navigate = useNavigate();
   const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
 
   if (!course || !course.syllabus) return null;
@@ -116,11 +118,11 @@ export default function SyllabusModal({ isOpen, onClose, course, onEnquire }: Sy
               <button 
                 onClick={() => {
                   onClose();
-                  onEnquire();
+                  navigate('/admission');
                 }}
                 className="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200"
               >
-                Enquire Now
+                Admission Now
               </button>
             </div>
           </motion.div>
