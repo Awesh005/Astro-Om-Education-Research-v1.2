@@ -97,7 +97,7 @@ export default function About() {
                   <Star className="fill-blue-600 text-blue-600" size={20} /> Fee Scholarship Policy
                 </h3>
                 <p className="text-blue-700 text-sm leading-relaxed">
-                  Top 10% students with excellent academic and practical performance after one year will be eligible for a fee refund.
+                  Top 10% students with excellent academic and practical performance after one year will be eligible for a fee education under scholarship policy.
                 </p>
               </div>
 
