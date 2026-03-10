@@ -143,48 +143,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col gap-6 max-w-lg mx-auto w-full"
           >
-            {/* Banner 1: Fee Scholarship Policy */}
-            <motion.div
-              whileHover={{ scale: 1.03, y: -4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer group"
-              style={{
-                background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%)",
-              }}
-            >
-              {/* Decorative glow */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-amber-400/20 rounded-full blur-2xl group-hover:bg-amber-400/30 transition-all duration-500" />
-              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-400/15 rounded-full blur-2xl" />
-
-              <div className="relative p-6 md:p-8">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-1.5 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Scholarship Opportunity
-                </div>
-
-                {/* Icon + Title */}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
-                    <GraduationCap className="w-7 h-7 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
-                      Fee Scholarship Policy
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-blue-100/90 text-sm md:text-base leading-relaxed">
-                  Top <span className="text-amber-300 font-bold">10%</span> students with excellent academic and practical performance after one year will be eligible for a <span className="text-amber-300 font-bold">free education</span> under the scholarship policy.
-                </p>
-
-                {/* Bottom accent line */}
-                <div className="mt-5 h-1 w-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-transparent opacity-60" />
-              </div>
-            </motion.div>
-
+           
             {/* Banner 2: Admission Open – Apply Now */}
             <motion.div
               whileHover={{ scale: 1.03, y: -4 }}
@@ -232,7 +191,50 @@ export default function Hero() {
                 </button>
               </div>
             </motion.div>
-          </motion.div>
+          
+
+           {/* Banner 1: Fee Scholarship Policy */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer group"
+              style={{
+                background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%)",
+              }}
+            >
+              {/* Decorative glow */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-amber-400/20 rounded-full blur-2xl group-hover:bg-amber-400/30 transition-all duration-500" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-400/15 rounded-full blur-2xl" />
+
+              <div className="relative p-6 md:p-8">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-1.5 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Scholarship Opportunity
+                </div>
+
+                {/* Icon + Title */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
+                    <GraduationCap className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
+                      Fee Scholarship Policy
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-blue-100/90 text-sm md:text-base leading-relaxed">
+                  Top <span className="text-amber-300 font-bold">10%</span> students with excellent academic and practical performance after one year will be eligible for a <span className="text-amber-300 font-bold">free education</span> under the scholarship policy.
+                </p>
+
+                {/* Bottom accent line */}
+                <div className="mt-5 h-1 w-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-transparent opacity-60" />
+              </div>
+            </motion.div>
+</motion.div>
         </div>
       </Container>
     </section>

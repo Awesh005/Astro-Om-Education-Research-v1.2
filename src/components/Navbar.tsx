@@ -108,8 +108,14 @@ export default function Navbar() {
             </PrimaryButton>
           </div>
 
-          {/* Mobile Toggle */}
-          <div className="lg:hidden">
+          {/* Mobile: Admission Button + Toggle */}
+          <div className="lg:hidden flex items-center gap-2">
+            <button
+              onClick={() => handleNavigation('/admission')}
+              className="px-3 py-1.5 text-xs font-bold text-white rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 shadow-md shadow-emerald-500/25 hover:from-emerald-400 hover:to-teal-400 active:scale-95 transition-all duration-200 whitespace-nowrap"
+            >
+              Admission Now
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 hover:text-indigo-600 p-2"
