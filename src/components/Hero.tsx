@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { CheckCircle2, ChevronDown } from "lucide-react";
+import { CheckCircle2, GraduationCap, Sparkles, ArrowRight, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "./ui/Layout";
 import React, { useState, useEffect } from "react";
@@ -17,11 +17,6 @@ const courses = [
 export default function Hero() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [studentClass, setStudentClass] = useState("");
-  const [board, setBoard] = useState("");
-  const [mobile, setMobile] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,41 +25,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    const formData = new FormData();
-
-    // ✅ Correct Google Form Entry IDs (Placeholder IDs - Update with actual if available)
-    formData.append("entry.1345355600", name);
-    formData.append("entry.335730671", email);
-    formData.append("entry.994511878", studentClass); // Mapped to Class
-    formData.append("entry.BOARD_ID_PLACEHOLDER", board); // Mapped to Board
-    formData.append("entry.1963209061", mobile);
-
-    try {
-      await fetch(
-        "https://docs.google.com/forms/d/e/1FAIpQLSfbERB8_CBmQ_2PrZUxgWJXD-Yf4YU9ZIydWLuhsOynL8dRVg/formResponse",
-        {
-          method: "POST",
-          mode: "no-cors",
-          body: formData,
-        },
-      );
-
-      alert("Enquiry Submitted Successfully!");
-
-      // Reset form
-      setName("");
-      setEmail("");
-      setStudentClass("");
-      setBoard("");
-      setMobile("");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("There was an error submitting the form. Please try again.");
-    }
-  };
 
   return (
     <section className="relative min-h-screen flex items-center bg-[#00256C] pt-32 pb-12 overflow-hidden">
@@ -175,134 +136,102 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column: Form Card */}
+          {/* Right Column: Promotional Banners */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl max-w-md mx-auto w-full"
+            className="flex flex-col gap-6 max-w-lg mx-auto w-full"
           >
-            <div className="mb-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  Enquire Now
-                </h3>
-                <p className="text-slate-500 text-sm">
-                  Get guidance for your bright future.
+            {/* Banner 1: Fee Scholarship Policy */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer group"
+              style={{
+                background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%)",
+              }}
+            >
+              {/* Decorative glow */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-amber-400/20 rounded-full blur-2xl group-hover:bg-amber-400/30 transition-all duration-500" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-400/15 rounded-full blur-2xl" />
+
+              <div className="relative p-6 md:p-8">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-1.5 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Scholarship Opportunity
+                </div>
+
+                {/* Icon + Title */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
+                    <GraduationCap className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
+                      Fee Scholarship Policy
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-blue-100/90 text-sm md:text-base leading-relaxed">
+                  Top <span className="text-amber-300 font-bold">10%</span> students with excellent academic and practical performance after one year will be eligible for a <span className="text-amber-300 font-bold">free education</span> under the scholarship policy.
                 </p>
-              </div>
-              <button
-                onClick={() => navigate('/admission')}
-                className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors shadow-lg shadow-blue-600/30 whitespace-nowrap"
-              >
-                Apply for Admission
-              </button>
-            </div>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                  Full Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your Full Name"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
-                />
+                {/* Bottom accent line */}
+                <div className="mt-5 h-1 w-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-transparent opacity-60" />
               </div>
+            </motion.div>
 
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                  Email Id <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your Email ID"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
-                />
-              </div>
+            {/* Banner 2: Admission Open – Apply Now */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer group"
+              style={{
+                background: "linear-gradient(135deg, #1a0a2e 0%, #3b0764 50%, #581c87 100%)",
+              }}
+            >
+              {/* Decorative glow */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-400/20 rounded-full blur-2xl group-hover:bg-emerald-400/30 transition-all duration-500" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-purple-400/15 rounded-full blur-2xl" />
 
-              {/* Class Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Class <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={studentClass}
-                  onChange={(e) => setStudentClass(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-700 bg-white"
+              <div className="relative p-6 md:p-8">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-1.5 bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4 animate-pulse">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Limited Time – Enroll Now
+                </div>
+
+                {/* Icon + Title */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                    <BookOpen className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
+                      Admission Open – Apply Now
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-purple-100/90 text-sm md:text-base leading-relaxed mb-5">
+                  Secure your child's future today! Admissions are open for all classes. Don't miss this opportunity.
+                </p>
+
+                {/* CTA Button */}
+                <button
+                  onClick={() => navigate('/admission')}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-900 font-bold text-base transition-all duration-300 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-400/50 hover:gap-3"
                 >
-                  <option value="" disabled>
-                    Select your Class
-                  </option>
-                  <option value="Class 6">Class 6</option>
-                  <option value="Class 7">Class 7</option>
-                  <option value="Class 8">Class 8</option>
-                  <option value="Class 9">Class 9</option>
-                  <option value="Class 10">Class 10</option>
-                  <option value="Other">Other</option>
-                </select>
+                  Apply for Admission
+                  <ArrowRight className="w-5 h-5" />
+                </button>
               </div>
-
-              {/* Board Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Select your Board <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={board}
-                  onChange={(e) => setBoard(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-700 bg-white"
-                >
-                  <option value="" disabled>
-                    Select your Board
-                  </option>
-                  <option value="CBSE Board">CBSE Board</option>
-                  <option value="JAC Board">JAC Board</option>
-                  <option value="Other State Board">Other State Board</option>
-                </select>
-              </div>
-
-              {/* Mobile */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                  Mobile Number <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  placeholder="Enter your mobile number"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
-                />
-              </div>
-
-              <button className="w-full bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold py-4 rounded-lg transition-colors shadow-lg shadow-red-900/20 text-lg">
-                Submit Enquiry
-              </button>
-
-              <p className="text-xs text-slate-400 text-center leading-relaxed">
-                By submitting, I agree to Astro Om's{" "}
-                <a href="#" className="text-blue-600 hover:underline">
-                  Terms
-                </a>{" "}
-                and{" "}
-                <a href="#" className="text-blue-600 hover:underline">
-                  Privacy Policy
-                </a>
-              </p>
-            </form>
+            </motion.div>
           </motion.div>
         </div>
       </Container>
