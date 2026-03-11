@@ -6,14 +6,14 @@ import { SectionWrapper, Container } from '../components/ui/Layout';
 import { Badge } from '../components/ui/Badge';
 import { PrimaryButton } from '../components/ui/Buttons';
 import { Card } from '../components/ui/Cards';
-import ServiceEnquiryModal from '../components/ServiceEnquiryModal';
+import CourseEnquiryModal from '../components/CourseEnquiryModal';
 
 export default function ServicesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="pt-32">
-      <ServiceEnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <CourseEnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       {/* Hero Section */}
       <section className="relative bg-slate-50 py-20 lg:py-32 overflow-hidden">
