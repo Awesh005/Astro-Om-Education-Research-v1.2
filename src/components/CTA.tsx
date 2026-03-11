@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { PrimaryButton, SecondaryButton } from './ui/Buttons';
 import { SectionWrapper } from './ui/Layout';
-import CourseEnquiryModal from './CourseEnquiryModal';
+import EnquiryForm from './EnquiryForm';
 import { useNavigate } from 'react-router-dom';
 
 export default function CTA() {
@@ -49,8 +49,27 @@ export default function CTA() {
           </div>
         </motion.div>
       </div>
-
-      <CourseEnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <EnquiryForm onSuccess={() => setIsModalOpen(false)} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SectionWrapper>
   );
 }

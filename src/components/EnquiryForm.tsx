@@ -38,12 +38,15 @@ export default function EnquiryForm({ onSuccess }: EnquiryFormProps) {
 
     setIsSubmitting(true);
     
-    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfmELFPb5ieG-EdmNil6i_vo_soSvjBtyFf0Q_RmvesEm9xgw/formResponse";
-    const data = new FormData();
-    data.append("entry.1404571374", formData.name);
-    data.append("entry.471054464", formData.phone);
-    data.append("entry.1645794894", `${formData.grade} - ${formData.board}`);
-    data.append("entry.899394948", formData.message);
+       const formUrl =
+"https://docs.google.com/forms/d/e/1FAIpQLScRgupxNpegTSEiD6eFdfR296AlCgDsXRzrdJwnxdwVmBL6EA/formResponse";
+
+const data = new FormData();
+
+data.append("entry.1529598726", formData.name);
+data.append("entry.697887942", formData.phone);
+data.append("entry.54596413", `${formData.grade} - ${formData.board}`);
+data.append("entry.388033504", formData.message);
 
     try {
       await fetch(formUrl, {
@@ -51,6 +54,9 @@ export default function EnquiryForm({ onSuccess }: EnquiryFormProps) {
         mode: "no-cors",
         body: data,
       });
+
+ 
+
       
       setIsSubmitting(false);
       setIsSuccess(true);

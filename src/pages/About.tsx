@@ -1,11 +1,15 @@
-import { motion } from 'motion/react';
-import { Target, Lightbulb, Shield, Users, ArrowRight, Cpu, Award, DollarSign, Star, UserCheck, BookOpen, Laptop, Rocket, CheckCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Target, Lightbulb, Shield, Users, ArrowRight, Cpu, Award, DollarSign, Star, UserCheck, BookOpen, Laptop, Rocket, CheckCircle, X } from 'lucide-react';
 import { SectionWrapper, Container } from '../components/ui/Layout';
 import { Badge } from '../components/ui/Badge';
 import { PrimaryButton } from '../components/ui/Buttons';
 import { Card } from '../components/ui/Cards';
+import EnquiryForm from '../components/EnquiryForm';
+import { useState } from 'react';
 
 export default function About() {
+  const [showEnquiry, setShowEnquiry] = useState(false);
+
   const focusAreas = [
     { icon: <Award size={24} />, title: "Academic Excellence", description: "World-class curriculum and modern teaching methodologies." },
     { icon: <Lightbulb size={24} />, title: "Clarity of Thought", description: "Building strong concepts and critical thinking skills." },
@@ -205,7 +209,7 @@ export default function About() {
               </p>
               <PrimaryButton 
                 className="bg-white text-blue-700 hover:bg-blue-50 border-none px-8 py-4 text-lg"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => setShowEnquiry(true)}
               >
                 Enquire Now <ArrowRight className="ml-2" />
               </PrimaryButton>
@@ -213,6 +217,36 @@ export default function About() {
           </div>
         </Container>
       </SectionWrapper>
+
+      {/* Enquiry Form Modal */}
+      <AnimatePresence>
+        {showEnquiry && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setShowEnquiry(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowEnquiry(false)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-slate-100 hover:bg-red-100 text-slate-500 hover:text-red-600 flex items-center justify-center transition-colors"
+              >
+                <X size={20} />
+              </button>
+              <EnquiryForm onSuccess={() => setShowEnquiry(false)} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Send, MessageSquare, User, BookOpen, GraduationCap
 import EnquiryForm from '../components/EnquiryForm';
 
 const Contact = () => {
+  const [showEnquiry, setShowEnquiry] = useState(false);
 
   return (
     <div className="pt-32 pb-0">
@@ -111,6 +112,14 @@ const Contact = () => {
 
             {/* Right Column: Contact Form */}
             <div className="lg:col-span-8">
+              <div className="mb-6">
+                <button
+                  onClick={() => setShowEnquiry(true)}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+                >
+                  Enquire / Apply Now
+                </button>
+              </div>
               <EnquiryForm />
             </div>
           </div>
@@ -149,6 +158,28 @@ const Contact = () => {
           </a>
         </div>
       </section>
+
+      <AnimatePresence>
+        {showEnquiry && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setShowEnquiry(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <EnquiryForm onSuccess={() => setShowEnquiry(false)} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

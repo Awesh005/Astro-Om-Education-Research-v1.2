@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Upload, CheckCircle, AlertCircle, CreditCard, User, FileText, IndianRupee, QrCode, Send, ChevronRight, Check } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { motion } from 'motion/react';
+import { CheckCircle, AlertCircle, CreditCard, User, FileText, IndianRupee, QrCode, ChevronRight, Check, Link as LinkIcon } from 'lucide-react';
 import { Container } from '../components/ui/Layout';
 import { PrimaryButton } from '../components/ui/Buttons';
 
@@ -14,9 +14,9 @@ interface FormData {
   whatsapp: string;
   address: string;
   studentClass: string;
-  studentPhoto: File | null;
-  consentSignature: File | null;
-  paymentScreenshot: File | null;
+  studentPhoto: string;
+  consentSignature: string;
+  paymentScreenshot: string;
   captcha: string;
 }
 
@@ -32,9 +32,9 @@ export default function Admission() {
     whatsapp: '',
     address: '',
     studentClass: '',
-    studentPhoto: null,
-    consentSignature: null,
-    paymentScreenshot: null,
+    studentPhoto: '',
+    consentSignature: '',
+    paymentScreenshot: '',
     captcha: '',
   });
   
@@ -54,18 +54,6 @@ export default function Admission() {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof FormData) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (file.size > 2 * 1024 * 1024) {
-        setErrors(prev => ({ ...prev, [field]: 'File size must be less than 2MB' }));
-        return;
-      }
-      setFormData(prev => ({ ...prev, [field]: file }));
-      setErrors(prev => ({ ...prev, [field]: undefined }));
-    }
-  };
-
   const validateForm = () => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
     if (!formData.studentName) newErrors.studentName = 'Student Name is required';
@@ -75,9 +63,9 @@ export default function Admission() {
     if (!formData.whatsapp || !/^\d{10}$/.test(formData.whatsapp)) newErrors.whatsapp = 'Valid 10-digit WhatsApp Number is required';
     if (!formData.address) newErrors.address = 'Address is required';
     if (!formData.studentClass) newErrors.studentClass = 'Class selection is required';
-    if (!formData.studentPhoto) newErrors.studentPhoto = 'Student Photo is required';
-    if (!formData.consentSignature) newErrors.consentSignature = 'Consent Signature is required';
-    if (!formData.paymentScreenshot) newErrors.paymentScreenshot = 'Payment Screenshot is required';
+    if (!formData.studentPhoto) newErrors.studentPhoto = 'Student Photo URL is required';
+    if (!formData.consentSignature) newErrors.consentSignature = 'Consent Signature URL is required';
+    if (!formData.paymentScreenshot) newErrors.paymentScreenshot = 'Payment Screenshot URL is required';
     if (formData.captcha !== captchaAnswer) newErrors.captcha = 'Incorrect Captcha';
 
     setErrors(newErrors);
@@ -86,17 +74,53 @@ export default function Admission() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      setIsSubmitting(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      window.scrollTo(0, 0);
-    } else {
-      const firstError = document.querySelector('.error-field');
-      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    const formURL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSeKyFdlLDHBNEhKBkw_u4YeqzMYYqd_NzBt96wDJ4zce4bUug/formResponse";
+
+    const data = new FormData();
+
+    data.append("entry.535073662", formData.studentName);
+    data.append("entry.176083229", formData.fatherName);
+    data.append("entry.474664534", formData.schoolName);
+    data.append("entry.1071534890", formData.mobile);
+    data.append("entry.1104747060", formData.whatsapp);
+    data.append("entry.1604294463", formData.address);
+    data.append("entry.439409011", formData.studentClass);
+    data.append(
+      "entry.2063778533",
+      board === "CBSE" ? "CBSE" : "Other State Board"
+    );
+    data.append("entry.1340352109", formData.studentPhoto);
+    data.append("entry.454084665", formData.consentSignature);
+    data.append("entry.2032259177", formData.paymentScreenshot);
+
+    console.log({
+      name: formData.studentName,
+      father: formData.fatherName,
+      school: formData.schoolName,
+      mobile: formData.mobile,
+      whatsapp: formData.whatsapp,
+      address: formData.address,
+      class: formData.studentClass,
+      board: board === "CBSE" ? "CBSE" : "Other State Board",
+      studentPhoto: formData.studentPhoto,
+      consentSignature: formData.consentSignature,
+      paymentScreenshot: formData.paymentScreenshot
+    });
+
+    await fetch(formURL, {
+      method: "POST",
+      mode: "no-cors",
+      body: data,
+    });
+
+    setIsSubmitting(false);
+    setIsSuccess(true);
   };
 
   if (isSuccess) {
@@ -284,13 +308,14 @@ export default function Admission() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <FileUploadField 
+                <InputField 
                   label="Student Photo" 
                   name="studentPhoto" 
-                  file={formData.studentPhoto} 
-                  onChange={(e) => handleFileChange(e, 'studentPhoto')}
+                  value={formData.studentPhoto}
+                  onChange={handleInputChange}
                   error={errors.studentPhoto}
-                  helperText="JPG/PNG, Max 2MB"
+                  placeholder="https://example.com/photo.jpg"
+                  icon={<LinkIcon size={18} />}
                 />
                 
                 <div className="space-y-4">
@@ -298,13 +323,14 @@ export default function Admission() {
                     <p className="font-bold mb-1">Parent Consent Declaration:</p>
                     <p className="font-hindi text-lg leading-relaxed">"मैं अपने बच्चे <span className="border-b border-amber-800 px-2 font-bold">{formData.studentName || '_______'}</span> को Online Classes लेने की अनुमति देता/देती हूँ।"</p>
                   </div>
-                  <FileUploadField 
-                    label="Upload Consent Signature" 
+                  <InputField 
+                    label="Consent Signature" 
                     name="consentSignature" 
-                    file={formData.consentSignature} 
-                    onChange={(e) => handleFileChange(e, 'consentSignature')}
+                    value={formData.consentSignature}
+                    onChange={handleInputChange}
                     error={errors.consentSignature}
-                    helperText="Sign on paper, take photo & upload. Max 2MB"
+                    placeholder="https://example.com/signature.png"
+                    icon={<LinkIcon size={18} />}
                   />
                 </div>
               </div>
@@ -365,17 +391,18 @@ export default function Admission() {
                 </div>
 
                 <div className="flex-grow w-full">
-                  <FileUploadField 
-                    label="Upload Payment Screenshot" 
+                  <InputField 
+                    label="Payment Screenshot" 
                     name="paymentScreenshot" 
-                    file={formData.paymentScreenshot} 
-                    onChange={(e) => handleFileChange(e, 'paymentScreenshot')}
+                    value={formData.paymentScreenshot}
+                    onChange={handleInputChange}
                     error={errors.paymentScreenshot}
-                    helperText="Upload success screenshot. Max 2MB"
+                    placeholder="https://example.com/payment.jpg"
+                    icon={<LinkIcon size={18} />}
                   />
                   <div className="mt-4 p-4 bg-blue-50 text-blue-800 text-sm rounded-lg flex gap-3">
                     <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                    <p>Please ensure the Transaction ID (UTR) is clearly visible in the screenshot for quick verification.</p>
+                    <p>Please ensure the shared image URL clearly shows the Transaction ID (UTR) for quick verification.</p>
                   </div>
                 </div>
               </div>
@@ -446,42 +473,6 @@ function InputField({ label, name, value, onChange, error, placeholder, type = "
         {icon && <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">{icon}</div>}
       </div>
       {error && <p className="text-red-500 text-xs mt-1 error-field">{error}</p>}
-    </div>
-  );
-}
-
-function FileUploadField({ label, name, file, onChange, error, helperText }: any) {
-  return (
-    <div className="space-y-2">
-      <label className="block text-sm font-medium text-slate-700">
-        {label} <span className="text-red-500">*</span>
-      </label>
-      <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors ${error ? 'border-red-300 bg-red-50' : 'border-slate-300 hover:border-indigo-400 hover:bg-indigo-50'}`}>
-        <input
-          type="file"
-          id={name}
-          name={name}
-          accept="image/png, image/jpeg"
-          onChange={onChange}
-          className="hidden"
-        />
-        <label htmlFor={name} className="cursor-pointer flex flex-col items-center gap-2">
-          {file ? (
-            <>
-              <CheckCircle className="w-8 h-8 text-green-500" />
-              <span className="text-sm font-medium text-slate-900 truncate max-w-[200px]">{file.name}</span>
-              <span className="text-xs text-green-600">File selected</span>
-            </>
-          ) : (
-            <>
-              <Upload className="w-8 h-8 text-slate-400" />
-              <span className="text-sm font-medium text-indigo-600">Click to upload</span>
-              <span className="text-xs text-slate-500">{helperText}</span>
-            </>
-          )}
-        </label>
-      </div>
-      {error && <p className="text-red-500 text-xs error-field">{error}</p>}
     </div>
   );
 }
